@@ -147,7 +147,7 @@ export default function Contact() {
                   <p className="text-teal-600 font-semibold mb-4">
                     {method.detail}
                   </p>
-                  <Button className="w-full bg-teal-600 hover:bg-teal-700">
+                  <Button className="w-full bg-primary hover:bg-primary/90">
                     {method.action}
                   </Button>
                 </CardContent>
@@ -284,7 +284,7 @@ export default function Contact() {
                 <Button
                   type="submit"
                   size="lg"
-                  className="w-full bg-teal-600 hover:bg-teal-700"
+                  className="w-full bg-primary hover:bg-primary/90"
                 >
                   <Send className="mr-2 w-5 h-5" />
                   Send Message
@@ -334,25 +334,25 @@ export default function Contact() {
                 <div className="flex space-x-4">
                   <a
                     href="#"
-                    className="w-10 h-10 rounded-full bg-teal-600 flex items-center justify-center text-white hover:bg-teal-700 transition-colors"
+                    className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white hover:bg-primary/90 transition-colors"
                   >
                     <Facebook className="w-5 h-5" />
                   </a>
                   <a
                     href="#"
-                    className="w-10 h-10 rounded-full bg-teal-600 flex items-center justify-center text-white hover:bg-teal-700 transition-colors"
+                    className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white hover:bg-primary/90 transition-colors"
                   >
                     <Youtube className="w-5 h-5" />
                   </a>
                   <a
                     href="#"
-                    className="w-10 h-10 rounded-full bg-teal-600 flex items-center justify-center text-white hover:bg-teal-700 transition-colors"
+                    className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white hover:bg-primary/90 transition-colors"
                   >
                     <Instagram className="w-5 h-5" />
                   </a>
                   <a
                     href="#"
-                    className="w-10 h-10 rounded-full bg-teal-600 flex items-center justify-center text-white hover:bg-teal-700 transition-colors"
+                    className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white hover:bg-primary/90 transition-colors"
                   >
                     <Twitter className="w-5 h-5" />
                   </a>

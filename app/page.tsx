@@ -1,59 +1,82 @@
-'use client';
+"use client";
 
-import { ArrowRight, Book, Users, Heart, MessageCircle, Search, Globe } from 'lucide-react';
-import Link from 'next/link';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import HeroCarousel from '@/components/HeroCarousel';
+import {
+  ArrowRight,
+  Book,
+  Users,
+  Heart,
+  MessageCircle,
+  Search,
+  Globe,
+} from "lucide-react";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import HeroCarousel from "@/components/HeroCarousel";
 
 export default function Home() {
   const features = [
     {
       icon: Book,
-      title: 'Learn & Discover',
-      description: 'Explore comprehensive resources and educational materials to deepen your understanding.',
-      color: 'from-teal-500 to-cyan-600',
+      title: "Learn & Discover",
+      description:
+        "Explore comprehensive resources and educational materials to deepen your understanding.",
+      color: "from-green-500 to-emerald-600",
     },
     {
       icon: Users,
-      title: 'Community Connection',
-      description: 'Join a supportive community of individuals seeking knowledge and spiritual growth.',
-      color: 'from-blue-500 to-teal-600',
+      title: "Community Connection",
+      description:
+        "Join a supportive community of individuals seeking knowledge and spiritual growth.",
+      color: "from-emerald-500 to-green-600",
     },
     {
       icon: Heart,
-      title: 'Personal Growth',
-      description: 'Develop your faith and character through guided learning and reflection.',
-      color: 'from-cyan-500 to-blue-600',
+      title: "Personal Growth",
+      description:
+        "Develop your faith and character through guided learning and reflection.",
+      color: "from-green-500 to-teal-600",
     },
     {
       icon: MessageCircle,
-      title: 'Ask Questions',
-      description: 'Get answers to your questions from knowledgeable educators and community members.',
-      color: 'from-teal-600 to-cyan-700',
+      title: "Ask Questions",
+      description:
+        "Get answers to your questions from knowledgeable educators and community members.",
+      color: "from-emerald-600 to-green-700",
     },
   ];
 
   const topics = [
     {
-      title: 'Core Beliefs',
-      description: 'Understanding the fundamental principles and teachings',
-      image: 'https://images.pexels.com/photos/256381/pexels-photo-256381.jpeg?auto=compress&cs=tinysrgb&w=800',
+      title: "Core Beliefs",
+      description: "Understanding the fundamental principles and teachings",
+      image:
+        "https://images.pexels.com/photos/256381/pexels-photo-256381.jpeg?auto=compress&cs=tinysrgb&w=800",
     },
     {
-      title: 'Daily Practice',
-      description: 'Practical guidance for incorporating faith into everyday life',
-      image: 'https://images.pexels.com/photos/1001897/pexels-photo-1001897.jpeg?auto=compress&cs=tinysrgb&w=800',
+      title: "Daily Practice",
+      description:
+        "Practical guidance for incorporating faith into everyday life",
+      image:
+        "https://images.pexels.com/photos/1001897/pexels-photo-1001897.jpeg?auto=compress&cs=tinysrgb&w=800",
     },
     {
-      title: 'Community & Service',
-      description: 'Building connections and serving humanity together',
-      image: 'https://images.pexels.com/photos/1157557/pexels-photo-1157557.jpeg?auto=compress&cs=tinysrgb&w=800',
+      title: "Community & Service",
+      description: "Building connections and serving humanity together",
+      image:
+        "https://images.pexels.com/photos/1157557/pexels-photo-1157557.jpeg?auto=compress&cs=tinysrgb&w=800",
     },
     {
-      title: 'Spiritual Development',
-      description: 'Growing in wisdom, compassion, and understanding',
-      image: 'https://images.pexels.com/photos/1738986/pexels-photo-1738986.jpeg?auto=compress&cs=tinysrgb&w=800',
+      title: "Spiritual Development",
+      description: "Growing in wisdom, compassion, and understanding",
+      image:
+        "https://images.pexels.com/photos/1738986/pexels-photo-1738986.jpeg?auto=compress&cs=tinysrgb&w=800",
     },
   ];
 
@@ -67,14 +90,22 @@ export default function Home() {
               Discover Knowledge, Build Understanding
             </h1>
             <p className="text-xl sm:text-2xl mb-8 text-teal-50 leading-relaxed">
-              Your journey to enlightenment begins here. Explore resources, connect with community, and grow in faith.
+              Your journey to enlightenment begins here. Explore resources,
+              connect with community, and grow in faith.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button size="lg" className="bg-white text-teal-700 hover:bg-gray-100">
+              <Button
+                size="lg"
+                className="bg-white text-teal-700 hover:bg-gray-100"
+              >
                 Get Started
                 <ArrowRight className="ml-2 w-5 h-5" />
               </Button>
-              <Button size="lg" variant="outline" className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-teal-700">
+              <Button
+                size="lg"
+                variant="outline"
+                className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-teal-700"
+              >
                 Learn More
               </Button>
             </div>
@@ -86,15 +117,22 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {features.map((feature, index) => (
-              <Card key={index} className="border-2 hover:shadow-xl transition-shadow duration-300">
+              <Card
+                key={index}
+                className="border-2 hover:shadow-xl transition-shadow duration-300"
+              >
                 <CardHeader>
-                  <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${feature.color} flex items-center justify-center mb-4`}>
+                  <div
+                    className={`w-14 h-14 rounded-xl bg-gradient-to-br ${feature.color} flex items-center justify-center mb-4`}
+                  >
                     <feature.icon className="w-7 h-7 text-white" />
                   </div>
                   <CardTitle className="text-xl">{feature.title}</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <CardDescription className="text-base">{feature.description}</CardDescription>
+                  <CardDescription className="text-base">
+                    {feature.description}
+                  </CardDescription>
                 </CardContent>
               </Card>
             ))}
@@ -145,15 +183,24 @@ export default function Home() {
                 Have Questions? We're Here to Help
               </h2>
               <p className="text-xl text-teal-50 mb-8 leading-relaxed">
-                Our knowledgeable team is available 24/7 to answer your questions and provide guidance.
-                Whether you're new to your spiritual journey or seeking deeper understanding, we're here for you.
+                Our knowledgeable team is available 24/7 to answer your
+                questions and provide guidance. Whether you're new to your
+                spiritual journey or seeking deeper understanding, we're here
+                for you.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button size="lg" className="bg-white text-teal-700 hover:bg-gray-100">
+                <Button
+                  size="lg"
+                  className="bg-white text-teal-700 hover:bg-gray-100"
+                >
                   <MessageCircle className="mr-2 w-5 h-5" />
                   Chat With Us
                 </Button>
-                <Button size="lg" variant="outline" className="border-1 border-white text-teal-700 hover:bg-white/10">
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="border-1 border-white text-teal-700 hover:bg-white/10"
+                >
                   Call: 1-800-123-4567
                 </Button>
               </div>
@@ -206,16 +253,24 @@ export default function Home() {
             Ready to Begin Your Journey?
           </h2>
           <p className="text-xl text-gray-600 mb-8">
-            Join thousands of others who have found knowledge, community, and spiritual growth through FaithConnect.
+            Join thousands of others who have found knowledge, community, and
+            spiritual growth through FaithConnect.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/about">
-              <Button size="lg" className="bg-teal-600 hover:bg-teal-700 w-full sm:w-auto">
+              <Button
+                size="lg"
+                className="bg-primary hover:bg-primary/90 w-full sm:w-auto"
+              >
                 Learn About Us
                 <ArrowRight className="ml-2 w-5 h-5" />
               </Button>
             </Link>
-            <Button size="lg" variant="outline" className="border-1 border-white text-teal-700 hover:bg-white/10">
+            <Button
+              size="lg"
+              variant="outline"
+              className="border-1 border-white text-teal-700 hover:bg-white/10"
+            >
               Browse Resources
             </Button>
           </div>
