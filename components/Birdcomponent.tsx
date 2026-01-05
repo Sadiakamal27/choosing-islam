@@ -6,7 +6,7 @@ export default function Birdcomponent() {
       href="https://wa.me/923052087083"
       target="_blank"
       rel="noopener noreferrer"
-      className="fixed right-8 bottom-8 z-30 hidden lg:block group cursor-pointer"
+      className="fixed right-4 bottom-4 md:right-8 md:bottom-8 z-30 group cursor-pointer"
     >
       {/* Tooltip */}
       <div className="absolute -top-14 right-0 bg-[#25D366] text-white px-4 py-2 rounded-xl shadow-xl opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 whitespace-nowrap text-sm font-bold flex items-center gap-2 border-2 border-white">
@@ -19,10 +19,8 @@ export default function Birdcomponent() {
       </div>
 
       <div
-        className="hover:scale-110 transition-transform duration-300"
+        className="hover:scale-110 transition-transform duration-300 w-[70px] h-[70px] md:w-[100px] md:h-[100px]"
         style={{
-          width: "100px",
-          height: "100px",
           backgroundImage: "url(/keel-bird-reading.png)",
           backgroundSize: "contain",
           backgroundRepeat: "no-repeat",
