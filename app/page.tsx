@@ -1,5 +1,3 @@
-"use client";
-
 import {
   ArrowRight,
   Book,
@@ -19,8 +17,9 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import HeroCarousel from "@/components/HeroCarousel";
+import { getCategories } from "@/lib/contentful";
 
-export default function Home() {
+export default async function Home() {
   const features = [
     {
       icon: Book,
@@ -52,33 +51,46 @@ export default function Home() {
     },
   ];
 
-  const topics = [
-    {
-      title: "Core Beliefs",
-      description: "Understanding the fundamental principles and teachings",
-      image:
-        "https://images.pexels.com/photos/256381/pexels-photo-256381.jpeg?auto=compress&cs=tinysrgb&w=800",
-    },
-    {
-      title: "Daily Practice",
-      description:
-        "Practical guidance for incorporating faith into everyday life",
-      image:
-        "https://images.pexels.com/photos/1001897/pexels-photo-1001897.jpeg?auto=compress&cs=tinysrgb&w=800",
-    },
-    {
-      title: "Community & Service",
-      description: "Building connections and serving humanity together",
-      image:
-        "https://images.pexels.com/photos/1157557/pexels-photo-1157557.jpeg?auto=compress&cs=tinysrgb&w=800",
-    },
-    {
-      title: "Spiritual Development",
-      description: "Growing in wisdom, compassion, and understanding",
-      image:
-        "https://images.pexels.com/photos/1738986/pexels-photo-1738986.jpeg?auto=compress&cs=tinysrgb&w=800",
-    },
-  ];
+  // Fetch categories from Contentful
+  const contentfulCategories = await getCategories();
+
+  // Map Contentful categories to topics format (fallback to placeholder if empty)
+  const topics =
+    contentfulCategories.length > 0
+      ? contentfulCategories.map((cat) => ({
+          title: cat.fields.title,
+          description: cat.fields.description || "Explore this category",
+          image:
+            "https://images.pexels.com/photos/256381/pexels-photo-256381.jpeg?auto=compress&cs=tinysrgb&w=800",
+        }))
+      : [
+          {
+            title: "Core Beliefs",
+            description:
+              "Understanding the fundamental principles and teachings",
+            image:
+              "https://images.pexels.com/photos/256381/pexels-photo-256381.jpeg?auto=compress&cs=tinysrgb&w=800",
+          },
+          {
+            title: "Daily Practice",
+            description:
+              "Practical guidance for incorporating faith into everyday life",
+            image:
+              "https://images.pexels.com/photos/1001897/pexels-photo-1001897.jpeg?auto=compress&cs=tinysrgb&w=800",
+          },
+          {
+            title: "Community & Service",
+            description: "Building connections and serving humanity together",
+            image:
+              "https://images.pexels.com/photos/1157557/pexels-photo-1157557.jpeg?auto=compress&cs=tinysrgb&w=800",
+          },
+          {
+            title: "Spiritual Development",
+            description: "Growing in wisdom, compassion, and understanding",
+            image:
+              "https://images.pexels.com/photos/1738986/pexels-photo-1738986.jpeg?auto=compress&cs=tinysrgb&w=800",
+          },
+        ];
 
   return (
     <>

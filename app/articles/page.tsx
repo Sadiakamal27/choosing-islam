@@ -1,5 +1,3 @@
-"use client";
-
 import { Calendar, Clock, User, ArrowRight, BookOpen } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -10,102 +8,32 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { getArticles, getCategories } from "@/lib/contentful";
 
-// Dummy articles data
-const articles = [
-  {
-    id: 1,
-    slug: "understanding-five-pillars",
-    title: "Understanding the Five Pillars of Islam",
-    excerpt:
-      "Explore the fundamental practices that form the foundation of Islamic faith and practice.",
-    content: `The Five Pillars of Islam are the foundation of Muslim life. They are the testimony of faith, prayer, giving zakat (support of the needy), fasting during the month of Ramadan, and the pilgrimage to Makkah once in a lifetime for those who are able.`,
-    author: "Dr. Sarah Ahmed",
-    date: "2024-12-08",
-    readTime: "5 min read",
-    category: "Core Beliefs",
-    image:
-      "https://images.pexels.com/photos/256381/pexels-photo-256381.jpeg?auto=compress&cs=tinysrgb&w=800",
-  },
-  {
-    id: 2,
-    slug: "importance-of-prayer",
-    title: "The Importance of Daily Prayer in Islam",
-    excerpt:
-      "Learn about the significance of the five daily prayers and how they strengthen our connection with Allah.",
-    content: `Prayer (Salah) is the second pillar of Islam and is performed five times a day. It is a direct link between the worshipper and Allah. There is no hierarchical authority in Islam, and no priests, so the prayers are led by a learned person who knows the Quran.`,
-    author: "Imam Muhammad Hassan",
-    date: "2024-12-05",
-    readTime: "7 min read",
-    category: "Daily Practice",
-    image:
-      "https://images.pexels.com/photos/1001897/pexels-photo-1001897.jpeg?auto=compress&cs=tinysrgb&w=800",
-  },
-  {
-    id: 3,
-    slug: "ramadan-spiritual-journey",
-    title: "Ramadan: A Month of Spiritual Reflection",
-    excerpt:
-      "Discover the blessings and spiritual benefits of fasting during the holy month of Ramadan.",
-    content: `Ramadan is the ninth month of the Islamic lunar calendar. Every day during this month, Muslims around the world spend the daylight hours in a complete fast. During the blessed month of Ramadan, Muslims all over the world abstain from food, drink, and other physical needs during the daylight hours.`,
-    author: "Fatima Al-Zahra",
-    date: "2024-12-01",
-    readTime: "6 min read",
-    category: "Spiritual Development",
-    image:
-      "https://images.pexels.com/photos/1738986/pexels-photo-1738986.jpeg?auto=compress&cs=tinysrgb&w=800",
-  },
-  {
-    id: 4,
-    slug: "charity-in-islam",
-    title: "The Role of Charity and Zakat in Islam",
-    excerpt:
-      "Understanding the importance of giving and supporting those in need through Zakat and Sadaqah.",
-    content: `Zakat is the third pillar of Islam. It is an obligation upon Muslims to give a portion of their wealth to those in need. The word Zakat means both 'purification' and 'growth'. Our possessions are purified by setting aside a proportion for those in need.`,
-    author: "Sheikh Abdullah Rahman",
-    date: "2024-11-28",
-    readTime: "5 min read",
-    category: "Community & Service",
-    image:
-      "https://images.pexels.com/photos/1157557/pexels-photo-1157557.jpeg?auto=compress&cs=tinysrgb&w=800",
-  },
-  {
-    id: 5,
-    slug: "quran-guidance-for-life",
-    title: "The Quran: A Complete Guide for Life",
-    excerpt:
-      "Explore how the Holy Quran provides guidance for every aspect of our daily lives.",
-    content: `The Quran is the holy book of Islam. It is the word of Allah revealed to Prophet Muhammad (peace be upon him) through the Angel Gabriel. The Quran contains guidance on all aspects of life and the hereafter. It is a source of comfort, wisdom, and direction for Muslims worldwide.`,
-    author: "Dr. Aisha Khan",
-    date: "2024-11-25",
-    readTime: "8 min read",
-    category: "Core Beliefs",
-    image:
-      "https://images.pexels.com/photos/256381/pexels-photo-256381.jpeg?auto=compress&cs=tinysrgb&w=800",
-  },
-  {
-    id: 6,
-    slug: "prophet-muhammad-example",
-    title: "Prophet Muhammad: The Perfect Example",
-    excerpt:
-      "Learn about the life and teachings of Prophet Muhammad (peace be upon him) and his timeless message.",
-    content: `Prophet Muhammad (peace be upon him) is the final messenger of Allah. His life serves as a perfect example for all of humanity. He taught us about compassion, justice, honesty, and devotion to Allah. His teachings continue to guide millions of Muslims around the world.`,
-    author: "Imam Yusuf Ali",
-    date: "2024-11-20",
-    readTime: "10 min read",
-    category: "Core Beliefs",
-    image:
-      "https://images.pexels.com/photos/1001897/pexels-photo-1001897.jpeg?auto=compress&cs=tinysrgb&w=800",
-  },
-];
+export default async function ArticlesPage() {
+  // Fetch articles and categories from Contentful
+  const contentfulArticles = await getArticles();
+  const contentfulCategories = await getCategories();
 
-export default function ArticlesPage() {
+  // Map Contentful articles to the expected format
+  const articles = contentfulArticles.map((article) => ({
+    id: article.sys.id,
+    slug: article.fields.slug,
+    title: article.fields.title,
+    excerpt: article.fields.excerpt,
+    category: article.fields.category?.[0]?.fields?.title || "Uncategorized",
+    image: article.fields.thumbnail?.fields?.file?.url
+      ? `https:${article.fields.thumbnail.fields.file.url}`
+      : "https://images.pexels.com/photos/256381/pexels-photo-256381.jpeg?auto=compress&cs=tinysrgb&w=800",
+    date: article.fields.publishDate,
+    readTime: "5 min read", // You can calculate this based on content length
+    author: "Islamic Scholar", // Add author field to Contentful if needed
+  }));
+
+  // Map categories
   const categories = [
     "All",
-    "Core Beliefs",
-    "Daily Practice",
-    "Spiritual Development",
-    "Community & Service",
+    ...contentfulCategories.map((cat) => cat.fields.title),
   ];
 
   return (
