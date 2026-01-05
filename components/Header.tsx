@@ -1,6 +1,8 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
+
 import { useState } from "react";
 import {
   Menu,
@@ -34,10 +36,16 @@ export default function Header() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between py-4">
           {/* Logo */}
-          <Link href="/" className="flex items-center">
-            <span className="text-lg font-semibold text-gray-800">
-              Choosing Islam
-            </span>
+          <Link href="/" className="flex items-center gap-2">
+            <div className="relative ">
+              <Image
+                src="/belize-logo.png" // Replace with your actual logo path
+                alt="Choosing Islam Logo"
+                width={200} // set your desired width
+                height={200} // set your desired height
+                className="object-contain"
+              />
+            </div>
           </Link>
 
           {/* Desktop Navigation - Center */}
