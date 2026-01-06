@@ -16,6 +16,7 @@ export async function getCategories(): Promise<ContentfulCategory[]> {
   const response = await client.getEntries({
     content_type: "category",
     order: ["fields.title"] as any,
+    include: 2,
   });
 
   return response.items as unknown as ContentfulCategory[];

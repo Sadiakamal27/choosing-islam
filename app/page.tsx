@@ -60,8 +60,9 @@ export default async function Home() {
       ? contentfulCategories.map((cat) => ({
           title: cat.fields.title,
           description: cat.fields.description || "Explore this category",
-          image:
-            "https://images.pexels.com/photos/256381/pexels-photo-256381.jpeg?auto=compress&cs=tinysrgb&w=800",
+          image: cat.fields.catimage?.fields.file.url
+            ? `https:${cat.fields.catimage.fields.file.url}`
+            : "https://images.pexels.com/photos/256381/pexels-photo-256381.jpeg?auto=compress&cs=tinysrgb&w=800",
         }))
       : [
           {
@@ -165,9 +166,10 @@ export default async function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {topics.map((topic, index) => (
-              <div
+              <Link
                 key={index}
-                className="group relative overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer"
+                href={`/articles?category=${encodeURIComponent(topic.title)}`}
+                className="group relative overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer block"
               >
                 <div className="aspect-[4/3] relative">
                   <img
@@ -181,7 +183,7 @@ export default async function Home() {
                   <h3 className="text-xl font-bold mb-2">{topic.title}</h3>
                   <p className="text-sm text-gray-200">{topic.description}</p>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>

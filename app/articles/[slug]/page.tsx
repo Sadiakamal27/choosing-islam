@@ -22,12 +22,45 @@ const richTextOptions = {
     [BLOCKS.PARAGRAPH]: (node: any, children: React.ReactNode) => (
       <p className="mb-6">{children}</p>
     ),
+    [BLOCKS.HEADING_1]: (node: any, children: React.ReactNode) => (
+      <h1 className="text-3xl font-bold mt-10 mb-6">{children}</h1>
+    ),
     [BLOCKS.HEADING_2]: (node: any, children: React.ReactNode) => (
       <h2 className="text-2xl font-bold mt-8 mb-4">{children}</h2>
     ),
     [BLOCKS.HEADING_3]: (node: any, children: React.ReactNode) => (
       <h3 className="text-xl font-bold mt-6 mb-3">{children}</h3>
     ),
+    [BLOCKS.UL_LIST]: (node: any, children: React.ReactNode) => (
+      <ul className="list-disc pl-6 mb-6 spacing-y-2">{children}</ul>
+    ),
+    [BLOCKS.OL_LIST]: (node: any, children: React.ReactNode) => (
+      <ol className="list-decimal pl-6 mb-6 spacing-y-2">{children}</ol>
+    ),
+    [BLOCKS.LIST_ITEM]: (node: any, children: React.ReactNode) => (
+      <li className="pl-1">{children}</li>
+    ),
+    [BLOCKS.QUOTE]: (node: any, children: React.ReactNode) => (
+      <blockquote className="border-l-4 border-teal-500 pl-4 italic my-6 text-gray-700 bg-gray-50 py-2 rounded-r">
+        {children}
+      </blockquote>
+    ),
+    [BLOCKS.EMBEDDED_ASSET]: (node: any) => {
+      const { title, file } = node.data.target.fields;
+      if (!file) return null;
+      return (
+        <div className="my-8 rounded-xl overflow-hidden shadow-lg">
+          <img
+            src={`https:${file.url}`}
+            alt={title || "Article Image"}
+            className="w-full h-auto object-cover"
+          />
+          {title && (
+            <p className="text-center text-sm text-gray-500 mt-2">{title}</p>
+          )}
+        </div>
+      );
+    },
   },
 };
 

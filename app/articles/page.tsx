@@ -10,25 +10,41 @@ import {
 } from "@/components/ui/card";
 import { getArticles, getCategories } from "@/lib/contentful";
 
-export default async function ArticlesPage() {
+export default async function ArticlesPage({
+  searchParams,
+}: {
+  searchParams: { category?: string };
+}) {
   // Fetch articles and categories from Contentful
   const contentfulArticles = await getArticles();
   const contentfulCategories = await getCategories();
 
+  // Extract search params
+  const categoryFilter = searchParams?.category;
+
   // Map Contentful articles to the expected format
-  const articles = contentfulArticles.map((article) => ({
-    id: article.sys.id,
-    slug: article.fields.slug,
-    title: article.fields.title,
-    excerpt: article.fields.excerpt,
-    category: article.fields.category?.[0]?.fields?.title || "Uncategorized",
-    image: article.fields.thumbnail?.fields?.file?.url
-      ? `https:${article.fields.thumbnail.fields.file.url}`
-      : "https://images.pexels.com/photos/256381/pexels-photo-256381.jpeg?auto=compress&cs=tinysrgb&w=800",
-    date: article.fields.publishDate,
-    readTime: "5 min read", // You can calculate this based on content length
-    author: "Islamic Scholar", // Add author field to Contentful if needed
-  }));
+  const articles = contentfulArticles
+    .filter((article) => {
+      if (!categoryFilter || categoryFilter === "All") return true;
+      const articleCategory =
+        article.fields.category?.[0]?.fields?.title || "Uncategorized";
+      return articleCategory === categoryFilter;
+    })
+    .map((article) => ({
+      id: article.sys.id,
+      slug: article.fields.slug,
+      title: article.fields.title,
+      excerpt: article.fields.excerpt,
+      category: article.fields.category?.[0]?.fields?.title || "Uncategorized",
+      image: article.fields.thumbnail?.fields?.file?.url
+        ? `https:${article.fields.thumbnail.fields.file.url}`
+        : article.fields.category?.[0]?.fields?.catimage?.fields?.file?.url
+        ? `https:${article.fields.category[0].fields.catimage.fields.file.url}`
+        : "https://images.pexels.com/photos/256381/pexels-photo-256381.jpeg?auto=compress&cs=tinysrgb&w=800",
+      date: article.fields.publishDate,
+      readTime: "5 min read", // You can calculate this based on content length
+      author: "Islamic Scholar", // Add author field to Contentful if needed
+    }));
 
   // Map categories
   const categories = [
@@ -59,15 +75,29 @@ export default async function ArticlesPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex flex-wrap gap-3 justify-center">
             {categories.map((category) => (
-              <Button
+              <Link
                 key={category}
-                variant={category === "All" ? "default" : "outline"}
-                className={
-                  category === "All" ? "bg-teal-600 hover:bg-teal-700" : ""
+                href={
+                  category === "All"
+                    ? "/articles"
+                    : `/articles?category=${encodeURIComponent(category)}`
                 }
               >
-                {category}
-              </Button>
+                <Button
+                  variant={
+                    category === (categoryFilter || "All")
+                      ? "default"
+                      : "outline"
+                  }
+                  className={
+                    category === (categoryFilter || "All")
+                      ? "bg-teal-600 hover:bg-teal-700"
+                      : ""
+                  }
+                >
+                  {category}
+                </Button>
+              </Link>
             ))}
           </div>
         </div>
