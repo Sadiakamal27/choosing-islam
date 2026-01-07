@@ -44,5 +44,6 @@ export interface ContentfulArticle {
     category: ContentfulCategory[];
     publishDate: string;
     author?: string;
+    featuredOnHomepage?: boolean;
   };
 }

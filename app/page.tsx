@@ -17,7 +17,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import HeroCarousel from "@/components/HeroCarousel";
-import { getCategories } from "@/lib/contentful";
+import { getCategories, getRecentArticles } from "@/lib/contentful";
 
 export default async function Home() {
   const features = [
@@ -51,8 +51,9 @@ export default async function Home() {
     },
   ];
 
-  // Fetch categories from Contentful
+  // Fetch categories and recent articles from Contentful
   const contentfulCategories = await getCategories();
+  const recentArticles = await getRecentArticles(3);
 
   // Map Contentful categories to topics format (fallback to placeholder if empty)
   const topics =
@@ -189,6 +190,8 @@ export default async function Home() {
         </div>
       </section>
 
+      
+
       <section className="py-16 bg-gradient-to-br from-teal-600 to-cyan-700 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -257,6 +260,94 @@ export default async function Home() {
                 </CardContent>
               </Card>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Recent Articles Section */}
+      <section className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+              Recent Articles
+            </h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              Discover our latest insights and knowledge
+            </p>
+          </div>
+
+          {recentArticles.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {recentArticles.map((article) => {
+                const thumbnailUrl = article.fields.thumbnail?.fields.file.url
+                  ? `https:${article.fields.thumbnail.fields.file.url}`
+                  : "https://images.pexels.com/photos/256381/pexels-photo-256381.jpeg?auto=compress&cs=tinysrgb&w=800";
+
+                const categoryName =
+                  article.fields.category?.[0]?.fields.title || "General";
+                const publishDate = new Date(
+                  article.fields.publishDate
+                ).toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                });
+
+                return (
+                  <Link
+                    key={article.sys.id}
+                    href={`/articles/${article.fields.slug}`}
+                    className="group bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden"
+                  >
+                    <div className="aspect-[16/9] relative overflow-hidden">
+                      <img
+                        src={thumbnailUrl}
+                        alt={article.fields.title}
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                      />
+                      <div className="absolute top-4 left-4">
+                        <span className="bg-teal-600 text-white px-3 py-1 rounded-full text-sm font-medium">
+                          {categoryName}
+                        </span>
+                      </div>
+                    </div>
+                    <div className="p-6">
+                      <p className="text-sm text-gray-500 mb-2">
+                        {publishDate}
+                      </p>
+                      <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-teal-600 transition-colors line-clamp-2">
+                        {article.fields.title}
+                      </h3>
+                      <p className="text-gray-600 line-clamp-3 mb-4">
+                        {article.fields.excerpt}
+                      </p>
+                      <div className="flex items-center text-teal-600 font-medium group-hover:gap-2 transition-all">
+                        Read More
+                        <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
+                      </div>
+                    </div>
+                  </Link>
+                );
+              })}
+            </div>
+          ) : (
+            <div className="text-center py-12">
+              <p className="text-gray-500 text-lg">
+                No articles available yet. Check back soon!
+              </p>
+            </div>
+          )}
+
+          <div className="text-center mt-12">
+            <Link href="/articles">
+              <Button
+                size="lg"
+                className="bg-teal-600 hover:bg-teal-700 text-white"
+              >
+                View All Articles
+                <ArrowRight className="ml-2 w-5 h-5" />
+              </Button>
+            </Link>
           </div>
         </div>
       </section>

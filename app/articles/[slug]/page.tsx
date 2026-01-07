@@ -137,21 +137,23 @@ export default async function ArticlePage({
           className="w-full h-full object-cover opacity-60"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
-        <div className="absolute bottom-0 left-0 right-0 p-8">
+        <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-8">
           <div className="max-w-4xl mx-auto">
-            <Link href="/articles">
-              <Button
-                variant="ghost"
-                className="text-white hover:bg-white/20 mb-4"
-              >
-                <ArrowLeft className="mr-2 w-4 h-4" />
-                Back to Articles
-              </Button>
-            </Link>
-            <span className="bg-teal-600 text-white px-3 py-1 rounded-full text-sm font-medium">
-              {articleData.category}
-            </span>
-            <h1 className="text-4xl sm:text-5xl font-bold text-white mt-4 mb-4">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4">
+              <Link href="/articles">
+                <Button
+                  variant="ghost"
+                  className="text-white hover:bg-white/20 w-fit"
+                >
+                  <ArrowLeft className="mr-2 w-4 h-4" />
+                  Back to Articles
+                </Button>
+              </Link>
+              <span className="bg-teal-600 text-white px-3 py-1 rounded-full text-sm font-medium w-fit">
+                {articleData.category}
+              </span>
+            </div>
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">
               {articleData.title}
             </h1>
             <div className="flex flex-wrap items-center gap-6 text-white/90">

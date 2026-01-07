@@ -48,3 +48,17 @@ export async function getArticleBySlug(
 
   return response.items[0] as unknown as ContentfulArticle;
 }
+
+export async function getRecentArticles(
+  limit: number = 3
+): Promise<ContentfulArticle[]> {
+  const response = await client.getEntries({
+    content_type: "article",
+    "fields.featuredOnHomepage": true,
+    order: ["-fields.publishDate"] as any,
+    include: 4,
+    limit,
+  });
+
+  return response.items as unknown as ContentfulArticle[];
+}
