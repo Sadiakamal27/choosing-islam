@@ -190,8 +190,6 @@ export default async function Home() {
         </div>
       </section>
 
-      
-
       <section className="py-16 bg-gradient-to-br from-teal-600 to-cyan-700 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -216,7 +214,7 @@ export default async function Home() {
                 <Button
                   size="lg"
                   variant="outline"
-                  className="border-1 border-white text-teal-700 hover:bg-white/10"
+                  className="border-1 border-white text-teal-700 hover:bg-gray-100"
                 >
                   Call: 1-800-123-4567
                 </Button>
@@ -359,7 +357,7 @@ export default async function Home() {
           </h2>
           <p className="text-xl text-gray-600 mb-8">
             Join thousands of others who have found knowledge, community, and
-            spiritual growth through FaithConnect.
+            spiritual growth through Islamic Dawah Center of Belize.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/about">

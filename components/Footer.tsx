@@ -33,14 +33,13 @@ export default function Footer() {
           {/* Brand */}
           <div>
             <div className="flex items-center space-x-2 mb-4">
-             
-               <Image
-                              src="/belize-logo.png" // Replace with your actual logo path
-                              alt="Choosing Islam Logo"
-                              width={200} // set your desired width
-                              height={200} // set your desired height
-                              className="object-contain"
-                            />
+              <Image
+                src="/belize-logo.png" // Replace with your actual logo path
+                alt="Choosing Islam Logo"
+                width={200} // set your desired width
+                height={200} // set your desired height
+                className="object-contain"
+              />
             </div>
             <p className="text-sm mb-4">
               Connecting people with knowledge, understanding, and community
@@ -152,7 +151,7 @@ export default function Footer() {
               </li>
               <li className="flex items-start space-x-3">
                 <Mail className="w-5 h-5 mt-0.5 flex-shrink-0" />
-                <span className="text-sm">info@faithconnect.org</span>
+                <span className="text-sm">info@islamicdawahbelize.org</span>
               </li>
               <li className="flex items-start space-x-3">
                 <MapPin className="w-5 h-5 mt-0.5 flex-shrink-0" />
@@ -169,7 +168,8 @@ export default function Footer() {
         {/* Bottom Copyright */}
         <div className="border-t border-white/20 mt-8 pt-8 text-center text-sm">
           <p>
-            &copy; {new Date().getFullYear()} FaithConnect. All rights reserved.
+            &copy; {new Date().getFullYear()} Islamic Dawah Center of Belize.
+            All rights reserved.
           </p>
         </div>
       </div>

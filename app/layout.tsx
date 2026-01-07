@@ -8,7 +8,8 @@ import Birdcomponent from "@/components/Birdcomponent";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "FaithConnect - Discover Knowledge, Build Understanding",
+  title:
+    "Islamic Dawah Center of Belize - Discover Knowledge, Build Understanding",
   description:
     "Your journey to enlightenment begins here. Explore resources, connect with community, and grow in faith through education and dialogue.",
 };

@@ -63,7 +63,7 @@ export default function Header() {
             <div className="relative ">
               <Image
                 src="/belize-logo.png" // Replace with your actual logo path
-                alt="Choosing Islam Logo"
+                alt="Islamic Dawah Center of Belize Logo"
                 width={200} // set your desired width
                 height={200} // set your desired height
                 className="object-contain"
